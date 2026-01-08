@@ -1,5 +1,13 @@
-FROM nginx:alpine
-COPY index.html /usr/share/nginx/html/index.html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+FROM node:alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY index.html ./
+COPY server.js ./
+
 EXPOSE 8081
-CMD ["nginx", "-g", "daemon off;"]
+
+CMD ["node", "server.js"]
