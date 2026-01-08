@@ -39,9 +39,3 @@ jobs:
           -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
           -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
           --push .
-    
-    - name: Deploy to App Runner
-      run: |
-        aws apprunner start-deployment \
-          --service-arn ${{ secrets.APPRUNNER_SERVICE_ARN }} \
-          --region ${{ env.AWS_REGION }}
